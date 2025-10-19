@@ -1,0 +1,9 @@
+db_path: data/memorycloud.db
+data_dir: data
+keys_dir: .keys
+audit_log: provenance/audit.jsonl
+retention_days: 7
+indicator_required: true
+limits:
+  request_size_mb: 10
+  rate_limit_per_min: 50
