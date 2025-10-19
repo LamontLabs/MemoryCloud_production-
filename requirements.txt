@@ -1,10 +1,8 @@
 # ───────────────────────────────────────────────
-# MemoryCloud™ — Requirements (v4.3.1)  [CORRECTED]
+# MemoryCloud™ — Requirements (v4.3.2)  [CORRECTED FINAL]
 # ───────────────────────────────────────────────
-# Notes:
-#  - Removed invalid flag `--use-pep517`.
-#  - All packages pinned for reproducible builds.
-#  - Build isolation is handled in CI, not here.
+# - Replaced deprecated 'cyclonedx-bom' with 'cyclonedx-python-lib'
+# - Verified PyPI availability for all packages on Python 3.11
 # ───────────────────────────────────────────────
 
 # Core server framework
@@ -29,8 +27,8 @@ reportlab==4.2.2
 pytest==8.3.3
 httpx==0.27.2
 
-# SBOM (CycloneDX CLI)
-cyclonedx-bom==4.3.1
+# SBOM (Modern)
+cyclonedx-python-lib==7.2.0
 
 # Quality (non-fatal)
 mypy==1.11.2
