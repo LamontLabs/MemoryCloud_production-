@@ -1,5 +1,5 @@
 # src/memorycloud/config.py
-# MemoryCloud™ — Configuration Loader (CI-verified / Pydantic v2.9+)
+# MemoryCloud™ — Configuration Loader (CI-stable / Pydantic v2.9+)
 import os
 from functools import lru_cache
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -7,11 +7,15 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     """
     Deterministic environment configuration for MemoryCloud.
-    Backward-compatible aliases for old test attributes:
-      - db_path → DB_PATH
-      - audit_log → LOG_DIR/audit.jsonl
+    Includes backward-compatible aliases for test and API imports:
+      - db_path      → DB_PATH
+      - audit_log    → LOG_DIR/audit.jsonl
+      - app_name     → APP_NAME
     """
     model_config = SettingsConfigDict(env_file=".env", env_prefix="MC_")
+
+    # Core identifiers
+    APP_NAME: str = "MemoryCloud"
 
     # Core paths
     DB_PATH: str = "data/memorycloud.db"
@@ -29,6 +33,11 @@ class Settings(BaseSettings):
     def audit_log(self) -> str:
         """Return the path for the default audit log JSONL file."""
         return os.path.join(self.LOG_DIR, "audit.jsonl")
+
+    @property
+    def app_name(self) -> str:
+        """Return app name for FastAPI title."""
+        return self.APP_NAME
 
 @lru_cache()
 def get_settings() -> Settings:
