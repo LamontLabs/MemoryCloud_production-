@@ -1,10 +1,14 @@
 # ───────────────────────────────────────────────
-# MemoryCloud™ — Requirements (v4.3)
+# MemoryCloud™ — Requirements (v4.3)  [REPLACEMENT]
 # Owner: Jesse J. Lamont • Org: Lamont Labs
 # Date: 2025-10-05
-# Purpose: Minimal deterministic dependencies
-# for demo, API, provenance, and verification.
+# Notes:
+#  - Removed the incorrect third-party "hashlib" package (stdlib only).
+#  - Added build isolation flag to avoid legacy setup.py pitfalls.
+#  - Versions pinned for deterministic CI.
 # ───────────────────────────────────────────────
+
+--use-pep517
 
 # Core server framework
 fastapi==0.115.2
@@ -14,9 +18,8 @@ uvicorn[standard]==0.30.6
 pydantic==2.9.2
 python-dotenv==1.0.1
 
-# Cryptography and provenance
+# Cryptography
 PyNaCl==1.5.0
-hashlib==20081119
 cryptography==43.0.1
 
 # Database
@@ -29,11 +32,10 @@ reportlab==4.2.2
 pytest==8.3.3
 httpx==0.27.2
 
-# SBOM generation (CycloneDX)
+# SBOM (CycloneDX CLI)
 cyclonedx-bom==4.3.1
 
-# Type checking & linting (optional)
+# Quality (optional, non-fatal in CI)
 mypy==1.11.2
 flake8==7.1.1
-
-# End of file
+black==24.8.0
