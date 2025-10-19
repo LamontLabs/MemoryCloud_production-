@@ -1,0 +1,19 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "serialNumber": "urn:uuid:8a2d2a00-5e41-4a1a-b83a-0bb20f00a3a1",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2025-10-05T00:00:00Z",
+    "tools": [
+      { "vendor": "Lamont Labs", "name": "MemoryCloud SBOM Generator", "version": "1.0" }
+    ]
+  },
+  "components": [
+    { "type": "library", "name": "fastapi", "version": "0.115.0" },
+    { "type": "library", "name": "uvicorn", "version": "0.31.0" },
+    { "type": "library", "name": "pydantic", "version": "2.6.0" },
+    { "type": "library", "name": "pynacl", "version": "1.5.0" },
+    { "type": "library", "name": "python-dotenv", "version": "1.0.1" }
+  ]
+}
