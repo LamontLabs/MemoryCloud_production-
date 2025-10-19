@@ -1,6 +1,5 @@
-# MemoryCloud™ — CI  [CORRECTED]
-# Enforces Python 3.11 and reproducible build isolation.
-# Removes the invalid `--use-pep517` dependency flag.
+# MemoryCloud™ — CI  [CORRECTED FINAL]
+# Updated to use cyclonedx-python-lib (modern SBOM package)
 
 name: CI
 
@@ -52,7 +51,5 @@ jobs:
       - name: Generate SBOM (non-fatal)
         shell: bash
         run: |
-          set +e
           source .venv/bin/activate
-          cyclonedx-bom -o SBOM/sbom.cdx.json -e requirements.txt
-          exit 0
+          python -m cyclonedx_py -o SBOM/sbom.cdx.json -e requirements.txt || true
