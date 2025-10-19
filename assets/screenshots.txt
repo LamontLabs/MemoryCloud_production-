@@ -1,0 +1,10 @@
+[HUD States]
+✔ — Provenance Verified (Signed)
+! — Fallback / Software Key Only
+✖ — Capture Blocked (Indicator OFF)
+
+[UI Demo Steps]
+1. POST /capture with indicator=true → returns ✔
+2. POST /capture with indicator=false → returns ✖
+3. GET /recall → displays captured entries
+4. GET /audit/export → shows JSONL audit chain
