@@ -1,0 +1,48 @@
+{
+  "project": "MemoryCloud",
+  "display_name": "MemoryCloud — Privacy-First AI Memory Assistant",
+  "version": "v4.3",
+  "date": "2025-10-05",
+  "owner": "Jesse J. Lamont",
+  "license": "MIT",
+  "trademark_notice": "MemoryCloud™ is a trademark of Jesse J. Lamont (not registered).",
+  "language": "Python 3.11",
+  "framework": "FastAPI",
+  "storage": "SQLite (local)",
+  "crypto": "PyNaCl (sealed-box using X25519/Curve25519; Ed25519 signatures)",
+  "hash_algo": "SHA-256",
+  "paths": {
+    "db": "data/memorycloud.db",
+    "data_dir": "data/",
+    "keys_priv": ".keys/memorycloud.key",
+    "keys_pub": ".keys/memorycloud.pub",
+    "audit_log": "provenance/audit.jsonl",
+    "checksums": "SBOM/checksums.csv",
+    "sbom": "SBOM/sbom.cdx.json",
+    "provenance_manifest": "SBOM/provenance.json",
+    "release_dir": "dist/"
+  },
+  "artifacts": [
+    "README.md",
+    "PROVENANCE.md",
+    "SECURITY.md",
+    "PRIVACY.md",
+    "verify.sh",
+    "SBOM/checksums.csv",
+    "SBOM/sbom.cdx.json",
+    "SBOM/provenance.json",
+    "provenance/audit.jsonl"
+  ],
+  "endpoints": [
+    {"method": "POST", "path": "/capture", "desc": "Capture memory (indicator-gated; sealed and logged)"},
+    {"method": "GET",  "path": "/recall",  "desc": "List or search recall entries"},
+    {"method": "GET",  "path": "/audit/export", "desc": "Export audit JSONL (hash-chained)"},
+    {"method": "GET",  "path": "/health", "desc": "Liveness probe"},
+    {"method": "GET",  "path": "/ready",  "desc": "Readiness probe"}
+  ],
+  "determinism": {
+    "verify_script": "verify.sh",
+    "root_hash_file": "provenance/root_hash.txt",
+    "notes": "Checksums are computed over tracked files in sorted order; audit chain continuity validated."
+  }
+}
