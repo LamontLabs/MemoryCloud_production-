@@ -1,0 +1,12 @@
+[
+  {
+    "text": "First memory captured with indicator ✔",
+    "indicator": true,
+    "created_at": "2025-10-05T00:00:00Z"
+  },
+  {
+    "text": "Fallback capture (! indicator disabled demo)",
+    "indicator": false,
+    "created_at": "2025-10-05T00:01:00Z"
+  }
+]
