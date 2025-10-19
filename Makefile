@@ -77,3 +77,6 @@ help:
 	@echo "  make sbom      - generate CycloneDX SBOM"
 	@echo "  make release   - package demo bundle"
 	@echo "  make clean     - remove build artifacts"
+test:
+	mkdir -p data logs keys
+	pytest -q
