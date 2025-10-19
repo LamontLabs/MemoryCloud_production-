@@ -1,3 +1,6 @@
+# MemoryCloud™ — CI  [REPLACEMENT]
+# Enforces Python 3.11, modern build tools, and deterministic checks.
+
 name: CI
 
 on:
@@ -9,20 +12,46 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Setup Python
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Install dependencies
+
+      - name: Install dependencies (venv + modern pip)
+        shell: bash
         run: |
-          python -m venv .venv
+          python3.11 -m venv .venv
           source .venv/bin/activate
+          python -m pip install --upgrade pip setuptools wheel
           pip install -r requirements.txt
+
+      - name: Lint (auto-fix if needed; non-fatal)
+        shell: bash
+        run: |
+          source .venv/bin/activate
+          black --check src tests || black src tests
+          flake8 src tests || true
+
       - name: Run tests
+        shell: bash
         run: |
           source .venv/bin/activate
           pytest -v
-      - name: Verify determinism
-        run: bash verify.sh
+
+      - name: Verify determinism & provenance
+        shell: bash
+        run: |
+          bash verify.sh
+
+      - name: Generate SBOM (non-fatal)
+        shell: bash
+        run: |
+          set +e
+          source .venv/bin/activate
+          cyclonedx-bom -o SBOM/sbom.cdx.json -e requirements.txt
+          exit 0
