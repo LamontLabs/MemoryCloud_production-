@@ -1,3 +1,6 @@
+# MemoryCloud™ — Release  [REPLACEMENT]
+# Uses Python 3.11 and bundles deterministic demo artifacts.
+
 name: Release
 
 on:
@@ -10,12 +13,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build release bundle
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build bundle
         run: |
-          mkdir -p dist
-          zip -r dist/MemoryCloud_release_${{ github.ref_name }}.zip . -x "*.venv*" -x "node_modules/*"
+          python3.11 -m venv .venv
+          source .venv/bin/activate
+          python -m pip install --upgrade pip setuptools wheel
+          pip install -r requirements.txt
+          make verify
+          make sbom
+          make release
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: MemoryCloud_release
-          path: dist/MemoryCloud_release_${{ github.ref_name }}.zip
+          name: MemoryCloud_v4.3_demo_bundle
+          path: dist/MemoryCloud_v4.3_demo.tar.gz
