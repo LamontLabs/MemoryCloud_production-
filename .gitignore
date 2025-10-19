@@ -1,0 +1,99 @@
+# ───────────────────────────────────────────────
+# MemoryCloud™ — .gitignore
+# Author: Jesse J. Lamont
+# Version: v4.3
+# Date: 2025-10-05
+# Purpose: Prevent accidental commit of secrets,
+# binaries, caches, or large artifacts.
+# ───────────────────────────────────────────────
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Build & dist artifacts
+build/
+dist/
+*.egg-info/
+*.spec
+
+# Logs
+logs/
+*.log
+nohup.out
+
+# Keys & credentials
+.keys/
+*.pem
+*.key
+*.pub
+*.crt
+
+# Environment / config
+.env
+.env.*
+config.yaml
+config.local.*
+.DS_Store
+
+# Database / storage
+data/
+*.db
+*.sqlite3
+
+# Provenance & SBOM
+provenance/
+SBOM/
+checksums.csv
+
+# IDE / tooling
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS / temp
+Thumbs.db
+*.tmp
+*.bak
+*.orig
+
+# Generated reports / docs exports
+*.pdf
+*.epub
+*.docx
+
+# Cached artifacts from demo run
+__output__/
+__cache__/
+.cache/
+.mypy_cache/
+.pytest_cache/
+
+# Node/React (HUD optional)
+node_modules/
+expo/
+*.expo/
+*.keystore
+
+# CI artifacts
+reports/
+coverage/
+*.coverage
+*.xml
+
+# Temporary verification files
+verify.log
+verify.tmp
+verify_output/
+
+# Ignore SBOM re-generation unless released
+sbom.cdx.json
+sbom.lock.json
+
+# End of file
