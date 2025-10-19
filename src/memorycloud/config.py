@@ -1,22 +1,21 @@
+# src/memorycloud/config.py
+# MemoryCloud™ — Configuration Loader (fixed for Pydantic v2.9+)
 import os
-from dotenv import load_dotenv
-from pydantic import BaseSettings, Field
-
-load_dotenv()
+from pydantic_settings import BaseSettings, SettingsConfigDict
+from functools import lru_cache
 
 class Settings(BaseSettings):
-    """Central configuration for MemoryCloud demo."""
-    app_name: str = Field("MemoryCloud", description="App display name")
-    db_path: str = Field(default="data/memorycloud.db", description="SQLite database path")
-    data_dir: str = Field(default="data", description="Local data directory")
-    keys_dir: str = Field(default=".keys", description="Keypair directory")
-    audit_log: str = Field(default="provenance/audit.jsonl", description="Provenance log path")
-    retention_days: int = Field(default=7, description="Retention policy in days")
-    indicator_required: bool = Field(default=True, description="Fail-closed capture gate")
-    api_host: str = Field(default="127.0.0.1")
-    api_port: int = Field(default=8000)
-    env: str = Field(default="local")
-    class Config:
-        env_prefix = "MC_"
+    model_config = SettingsConfigDict(env_file=".env", env_prefix="MC_")
 
-settings = Settings()
+    DB_PATH: str = "data/memorycloud.db"
+    KEY_PATH: str = "keys/mc.key"
+    DATA_DIR: str = "data"
+    LOG_DIR: str = "logs"
+    DEBUG: bool = True
+
+@lru_cache()
+def get_settings() -> Settings:
+    """Return cached environment settings."""
+    return Settings()
+
+settings = get_settings()
