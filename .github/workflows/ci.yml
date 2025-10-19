@@ -1,5 +1,6 @@
-# MemoryCloud™ — CI  [REPLACEMENT]
-# Enforces Python 3.11, modern build tools, and deterministic checks.
+# MemoryCloud™ — CI  [CORRECTED]
+# Enforces Python 3.11 and reproducible build isolation.
+# Removes the invalid `--use-pep517` dependency flag.
 
 name: CI
 
@@ -22,7 +23,7 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install dependencies (venv + modern pip)
+      - name: Install dependencies (modern pip)
         shell: bash
         run: |
           python3.11 -m venv .venv
