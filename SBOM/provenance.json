@@ -1,0 +1,14 @@
+{
+  "project": "MemoryCloud",
+  "version": "4.3",
+  "generated_at": "2025-10-05T00:00:00Z",
+  "build_env": {
+    "python": "3.11",
+    "os": "Ubuntu 22.04",
+    "tool": "make verify"
+  },
+  "commit": "seed-demo-v4.3",
+  "inputs": ["src/", "tests/", "requirements.txt"],
+  "outputs": ["SBOM/sbom.cdx.json", "SBOM/checksums.csv"],
+  "signature": "sha256:d4cdbf02f6d3c93ab7feca3a0a1d56a40f1c48b3418b5f6e0f93c6d40a4b92fa"
+}
